@@ -15,6 +15,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -25,7 +26,7 @@ public class DriveSubsystem extends SubsystemBase {
   private SparkMax m_frontRightMotor = new SparkMax(DriveConstants.kFrontRightPort, MotorType.kBrushless);
   private SparkMax m_backLeftMotor = new SparkMax(DriveConstants.kBackLeftPort, MotorType.kBrushless);
   private SparkMax m_backRightMotor = new SparkMax(DriveConstants.kBackRightPort, MotorType.kBrushless);
-  private DifferentialDrive m_differentialDrive = new DifferentialDrive(m_frontLeftMotor, m_frontRightMotor);
+  private MecanumDrive m_mecanumDrive = new MecanumDrive(m_frontLeftMotor, m_backLeftMotor, m_frontRightMotor, m_backRightMotor);
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
@@ -45,14 +46,14 @@ public class DriveSubsystem extends SubsystemBase {
     backLeftConfig.smartCurrentLimit(40);
     backLeftConfig.inverted(false);
     backLeftConfig.idleMode(IdleMode.kBrake);
-    backLeftConfig.follow(m_frontLeftMotor);
+//    backLeftConfig.follow(m_frontLeftMotor);
     m_backLeftMotor.configure(backLeftConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     SparkMaxConfig backRightConfig = new SparkMaxConfig();
     backRightConfig.smartCurrentLimit(40);
     backRightConfig.inverted(true);
     backRightConfig.idleMode(IdleMode.kBrake);
-    backRightConfig.follow(m_frontRightMotor);
+//    backRightConfig.follow(m_frontRightMotor);
     m_backRightMotor.configure(backRightConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
@@ -61,9 +62,9 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public Command driveCommand(DoubleSupplier x, DoubleSupplier theta) {
+  public Command driveCommand(DoubleSupplier x, DoubleSupplier y, DoubleSupplier theta) {
     return new RunCommand(() -> {
-      m_differentialDrive.arcadeDrive(x.getAsDouble(), theta.getAsDouble());
-    });
+      m_mecanumDrive.driveCartesian(x.getAsDouble(), y.getAsDouble(), theta.getAsDouble());
+    }, this);
   }
 }
