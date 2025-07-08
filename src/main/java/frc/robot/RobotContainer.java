@@ -34,11 +34,11 @@ public class RobotContainer {
     m_controller.povUp().onTrue(new InstantCommand(() -> m_elevatorSubsystem.setDesiredHeight(ElevatorConstants.kMaxHeight)));
     m_controller.povLeft().onTrue(new InstantCommand(() -> m_elevatorSubsystem.setDesiredHeight(ElevatorConstants.kMidHeight)));
     m_controller.povDown().onTrue(new InstantCommand(() -> m_elevatorSubsystem.setDesiredHeight(ElevatorConstants.kMinHeight)));
-    m_controller.leftTrigger().onTrue(new InstantCommand(() -> m_algaeArmSubsystem.setDesiredAngle(AlgaeArmConstants.kMinAngle)));
-    m_controller.rightTrigger().onTrue(new InstantCommand(() -> m_algaeArmSubsystem.setDesiredAngle(AlgaeArmConstants.kMaxAngle)));
-    m_controller.a().whileTrue(new RunCommand(() -> m_algaeRollerSubsystem.setDesiredSpeed(AlgaeRollerConstants.kIntakeSpeed)));
+    m_controller.leftTrigger().onTrue(new InstantCommand(() -> m_algaeArmSubsystem.setDesiredAngle(AlgaeArmConstants.kMaxAngle)));
+    m_controller.rightTrigger().onTrue(new InstantCommand(() -> m_algaeArmSubsystem.setDesiredAngle(AlgaeArmConstants.kMinAngle)));
+    m_controller.a().or(m_controller.rightTrigger()).whileTrue(new RunCommand(() -> m_algaeRollerSubsystem.setDesiredSpeed(AlgaeRollerConstants.kIntakeSpeed)));
     m_controller.b().whileTrue(new RunCommand(() -> m_algaeRollerSubsystem.setDesiredSpeed(AlgaeRollerConstants.kEjectSpeed)));
-    m_algaeRollerSubsystem.setDefaultCommand(new RunCommand(() -> m_algaeRollerSubsystem.setDesiredSpeed(0.0), m_algaeRollerSubsystem));
+    m_algaeRollerSubsystem.setDefaultCommand(new RunCommand(() -> m_algaeRollerSubsystem.setDesiredSpeed(0.1), m_algaeRollerSubsystem));
   }
 
   public Command getAutonomousCommand() {

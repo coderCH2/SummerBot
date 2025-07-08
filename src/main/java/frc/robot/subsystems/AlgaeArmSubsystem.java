@@ -23,6 +23,7 @@ public class AlgaeArmSubsystem extends SubsystemBase {
   
   /** Creates a new AlgaeArmSubsystem. */
   public AlgaeArmSubsystem() {
+    m_algaeArmMotor.getEncoder().setPosition(0);
     SparkMaxConfig algaeArmConfig = new SparkMaxConfig();
     algaeArmConfig.smartCurrentLimit(40);
     algaeArmConfig.idleMode(IdleMode.kBrake);

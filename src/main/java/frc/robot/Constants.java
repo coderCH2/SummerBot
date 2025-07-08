@@ -23,11 +23,11 @@ public final class Constants {
     }
     public static final class AlgaeArmConstants {
         public static final int kAlgaeArmPort = 6; // neo
-        public static final double kAlgaeArmP = 0.1;
+        public static final double kAlgaeArmP = 0.15;
         public static final double kAlgaeArmI = 0.0;
         public static final double kAlgaeArmD = 0.01;
-        public static final double kMaxAngle = 0.0;
-        public static final double kMinAngle = -1.0;
+        public static final double kMaxAngle = 2.0;
+        public static final double kMinAngle = 0.0;
     }
 
     public static final class AlgaeRollerConstants{
