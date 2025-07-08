@@ -46,7 +46,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   }
 
-  public void setSetpoint(double setpoint) {
+  public void setDesiredHeight(double setpoint) {
     m_setpoint = setpoint;
   }
 }

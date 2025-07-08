@@ -22,4 +22,22 @@ public final class Constants {
         public static final double kMaxSetpoint = 25.5;
     }
 
+    public static final class CoralRollerConstants {
+        public static final int kRollerPort = 9;
+        public static final double kEjectSpeed = 0.2;
+        public static final double kIntakeSpeed = -0.2;
+        public static final double kSensorBreakDistance = 0.0;
+    }
+
+    public static final class CoralArmConstants {
+        public static final int kArmPort = 8;
+        public static final double kArmP = 0.03;
+        public static final double kArmI = 0.0;
+        public static final double kArmD = 0.0;
+        public static final double kMinSetpoint = 0.0;
+        public static final double kUpSetpoint = -31.5;
+        public static final double kMaxSetpoint = -61.5; // not really the max, this is to be changed later
+            //-31.5 straight up   weird back L-53.07   m-61.5
+    }
+
 }
