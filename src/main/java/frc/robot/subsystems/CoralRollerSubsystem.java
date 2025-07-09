@@ -22,7 +22,7 @@ import frc.robot.Constants.CoralRollerConstants;
 
 public class CoralRollerSubsystem extends SubsystemBase {
   private SparkMax m_rollerMotor = new SparkMax(CoralRollerConstants.kRollerPort, MotorType.kBrushless);
-  private Rev2mDistanceSensor m_sensor = new Rev2mDistanceSensor(Port.kMXP, Unit.kMillimeters, RangeProfile.kHighSpeed);
+//  private Rev2mDistanceSensor m_sensor = new Rev2mDistanceSensor(Port.kMXP, Unit.kMillimeters, RangeProfile.kHighSpeed);
   private double m_setpoint = 0.0;
 
   /** Creates a new CoralRollerSubsystem. */
@@ -36,7 +36,6 @@ public class CoralRollerSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Sensor Range", m_sensor.GetRange());
     m_rollerMotor.set(m_setpoint);
   }
 
