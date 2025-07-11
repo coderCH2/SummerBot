@@ -36,4 +36,29 @@ public final class Constants {
         public static final double kEjectSpeed = -0.5;
     }
 
+    public static final class CoralRollerConstants {
+        public static final int kRollerPort = 9;
+        public static final double kEjectSpeed = 0.2;
+        public static final double kIntakeSpeed = -0.2;
+        public static final double kSensorBreakDistance = 0.0;
+    }
+
+    public static final class CoralArmConstants {
+        public static final int kArmPort = 8;
+        public static final double kArmP = 0.03;
+        public static final double kArmI = 0.0;
+        public static final double kArmD = 0.0;
+        public static final double kStartingAngle = 0.0;
+        public static final double kFrontHorizontalAngle = -13.35;
+        public static final double kVerticalAngle = -31.65;
+        public static final double kBackHorizontalAngle = -54.15;
+        public static final double kBackMaxAngle = -61.90;
+
+            //-31.5 straight up   weird back L-53.07   m-61.5
+        //-31.66
+        //-54.1
+        // -61.9
+        //
+    }
+
 }

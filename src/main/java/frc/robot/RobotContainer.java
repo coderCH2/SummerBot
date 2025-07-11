@@ -13,9 +13,13 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.AlgaeArmConstants;
 import frc.robot.Constants.AlgaeRollerConstants;
-import frc.robot.Constants.ElevatorConstants;
 import frc.robot.subsystems.AlgaeArmSubsystem;
 import frc.robot.subsystems.AlgaeRollerSubsytem;
+import frc.robot.Constants.CoralArmConstants;
+import frc.robot.Constants.CoralRollerConstants;
+import frc.robot.Constants.ElevatorConstants;
+import frc.robot.subsystems.CoralArmSubsystem;
+import frc.robot.subsystems.CoralRollerSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 
@@ -24,7 +28,10 @@ public class RobotContainer {
   private ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   private AlgaeRollerSubsytem m_algaeRollerSubsystem = new AlgaeRollerSubsytem();
   private AlgaeArmSubsystem m_algaeArmSubsystem = new AlgaeArmSubsystem();
+  private CoralArmSubsystem m_coralArmSubsystem = new CoralArmSubsystem();
+  private CoralRollerSubsystem m_coralRollerSubsystem = new CoralRollerSubsystem();
   private CommandXboxController m_controller = new CommandXboxController(0);
+
 
   public RobotContainer() {
     configureBindings();
@@ -39,6 +46,11 @@ public class RobotContainer {
     m_controller.a().or(m_controller.rightTrigger()).whileTrue(new RunCommand(() -> m_algaeRollerSubsystem.setDesiredSpeed(AlgaeRollerConstants.kIntakeSpeed)));
     m_controller.b().whileTrue(new RunCommand(() -> m_algaeRollerSubsystem.setDesiredSpeed(AlgaeRollerConstants.kEjectSpeed)));
     m_algaeRollerSubsystem.setDefaultCommand(new RunCommand(() -> m_algaeRollerSubsystem.setDesiredSpeed(0.1), m_algaeRollerSubsystem));
+    m_controller.leftBumper().onTrue(new InstantCommand(() -> m_coralArmSubsystem.setDesiredAngle(CoralArmConstants.kStartingAngle)));
+    m_controller.rightBumper().onTrue(new InstantCommand(() -> m_coralArmSubsystem.setDesiredAngle(CoralArmConstants.kBackMaxAngle)));
+    m_controller.x().whileTrue(new RunCommand(() -> m_coralRollerSubsystem.setDesiredSpeed(CoralRollerConstants.kIntakeSpeed)));
+    m_controller.y().whileTrue(new RunCommand(() -> m_coralRollerSubsystem.setDesiredSpeed(CoralRollerConstants.kEjectSpeed)));
+    m_coralRollerSubsystem.setDefaultCommand(new RunCommand(() -> m_coralRollerSubsystem.setDesiredSpeed(0.0), m_coralRollerSubsystem));
   }
 
   public Command getAutonomousCommand() {
