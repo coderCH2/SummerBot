@@ -37,16 +37,16 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Elevator Height", m_elevatorMotor.getEncoder().getPosition());
+    double encoderValue = m_elevatorMotor.getEncoder().getPosition();
+    SmartDashboard.putNumber("Elevator Height", encoderValue);
     SmartDashboard.putNumber("Elevator Setpoint", m_setpoint);
     SmartDashboard.putNumber("Elevator PID Error", m_elevatorPID.getError());
-    double output = m_elevatorPID.calculate(m_elevatorMotor.getEncoder().getPosition(), m_setpoint);
+    double output = m_elevatorPID.calculate(encoderValue, m_setpoint);
     SmartDashboard.putNumber("Elevator PID Output", output);
     m_elevatorMotor.set(output);
-
   }
 
-  public void setSetpoint(double setpoint) {
+  public void setDesiredHeight(double setpoint) {
     m_setpoint = setpoint;
   }
 }

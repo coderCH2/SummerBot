@@ -4,14 +4,23 @@
 
 package frc.robot;
 
+import edu.wpi.first.hal.PowerDistributionFaults;
+import edu.wpi.first.hal.simulation.DriverStationDataJNI;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand, m_teleopCommand;
+  private double m_batteryVoltage;
+  private double m_currentTotal;
 
   private final RobotContainer m_robotContainer;
+  PowerDistribution PDH = new PowerDistribution(63, ModuleType.kRev);
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -60,7 +69,16 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    m_batteryVoltage = PDH.getVoltage();
+    m_currentTotal = PDH.getTotalCurrent();
+    SmartDashboard.putNumber("Voltage", m_batteryVoltage);
+    SmartDashboard.putNumber("Current",m_currentTotal);
+  
+  
+
+
+  }
 
   @Override
   public void teleopExit() {}
