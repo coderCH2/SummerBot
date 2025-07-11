@@ -24,7 +24,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   private SparkMax m_elevatorMotor = new SparkMax(ElevatorConstants.kElevatorPort, MotorType.kBrushless);
   private PIDController m_elevatorPID = new PIDController(ElevatorConstants.kElevatorP, ElevatorConstants.kElevatorI,
       ElevatorConstants.kElevatorD);
-  private double m_setpoint = ElevatorConstants.kMinSetpoint;
+  private double m_setpoint = ElevatorConstants.kMinHeight;
 
   /** Creates a new ElevatorSubsystem. */
   public ElevatorSubsystem() {
@@ -46,7 +46,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     m_elevatorMotor.set(output);
   }
 
-  public void setDesiredHeight(double setpoint) {
-    m_setpoint = setpoint;
+  public void setDesiredHeight(double height) {
+    m_setpoint = height;
   }
 }

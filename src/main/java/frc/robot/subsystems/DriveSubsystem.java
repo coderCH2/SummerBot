@@ -14,6 +14,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
+import edu.wpi.first.math.estimator.MecanumDrivePoseEstimator;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -46,14 +47,12 @@ public class DriveSubsystem extends SubsystemBase {
     backLeftConfig.smartCurrentLimit(40);
     backLeftConfig.inverted(false);
     backLeftConfig.idleMode(IdleMode.kBrake);
-//    backLeftConfig.follow(m_frontLeftMotor);
     m_backLeftMotor.configure(backLeftConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     SparkMaxConfig backRightConfig = new SparkMaxConfig();
     backRightConfig.smartCurrentLimit(40);
     backRightConfig.inverted(true);
     backRightConfig.idleMode(IdleMode.kBrake);
-//    backRightConfig.follow(m_frontRightMotor);
     m_backRightMotor.configure(backRightConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 
