@@ -35,8 +35,8 @@ public class RobotContainer {
     m_controller.povUp().onTrue(new InstantCommand(() -> m_elevatorSubsystem.setDesiredHeight(ElevatorConstants.kMaxSetpoint)));
     m_controller.povLeft().onTrue(new InstantCommand(() -> m_elevatorSubsystem.setDesiredHeight(ElevatorConstants.kMidSetpoint)));
     m_controller.povDown().onTrue(new InstantCommand(() -> m_elevatorSubsystem.setDesiredHeight(ElevatorConstants.kMinSetpoint)));
-    m_controller.leftBumper().onTrue(new InstantCommand(() -> m_coralArmSubsystem.setDesiredAngle(CoralArmConstants.kMinSetpoint)));
-    m_controller.rightBumper().onTrue(new InstantCommand(() -> m_coralArmSubsystem.setDesiredAngle(CoralArmConstants.kUpSetpoint)));
+    m_controller.leftBumper().onTrue(new InstantCommand(() -> m_coralArmSubsystem.setDesiredAngle(CoralArmConstants.kStartingAngle)));
+    m_controller.rightBumper().onTrue(new InstantCommand(() -> m_coralArmSubsystem.setDesiredAngle(CoralArmConstants.kBackMaxAngle)));
     m_controller.x().whileTrue(new RunCommand(() -> m_coralRollerSubsystem.setDesiredSpeed(CoralRollerConstants.kIntakeSpeed)));
     m_controller.y().whileTrue(new RunCommand(() -> m_coralRollerSubsystem.setDesiredSpeed(CoralRollerConstants.kEjectSpeed)));
     m_coralRollerSubsystem.setDefaultCommand(new RunCommand(() -> m_coralRollerSubsystem.setDesiredSpeed(0.0), m_coralRollerSubsystem));

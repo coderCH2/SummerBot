@@ -23,6 +23,7 @@ public class CoralArmSubsystem extends SubsystemBase {
   private SparkMax m_armMotor = new SparkMax(Constants.CoralArmConstants.kArmPort, MotorType.kBrushless);
   private PIDController m_armPID = new PIDController(Constants.CoralArmConstants.kArmP,Constants.CoralArmConstants.kArmI,Constants.CoralArmConstants.kArmD);
   private double m_setpoint = 0.0;
+  public double currentTotal;
 
   /** Creates a new CoralArmSubsystem. */  
   public CoralArmSubsystem() {
@@ -32,6 +33,7 @@ public class CoralArmSubsystem extends SubsystemBase {
     config.idleMode(IdleMode.kBrake);
     config.inverted(false);
     m_armMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    
   }
 
   @Override
@@ -43,11 +45,17 @@ public class CoralArmSubsystem extends SubsystemBase {
     double output = m_armPID.calculate(encoderValue, m_setpoint);
     SmartDashboard.putNumber("Coral Arm PID Output", output);
     m_armMotor.set(output);
+    currentTotal = m_armMotor.getOutputCurrent();
+    SmartDashboard.putNumber("Arm_Motor_Current", currentTotal);
   }
 
   public void setDesiredAngle (double input){
     m_setpoint = input;
   }
 
+  public double getMotorCurrentDraw() {
+    return m_armMotor.getOutputCurrent();
+    
+  }
 
 }
